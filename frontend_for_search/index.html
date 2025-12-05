@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CRIMSy Login</title>
+    <link rel="stylesheet" href="css/login.css" />
+  </head>
+  
+  <body>
+    <div class="matrix-bg">
+      <canvas id="matrixCanvas"></canvas>
+    </div>
+
+    <div class="overlay">
+      <header class="app-header">Welcome to CRIMSy</header>
+
+      <main class="login-container">
+        <div class="login-card">
+          <h1 class="login-title">Sign in</h1>
+          <p class="login-subtitle">
+            Please enter your credentials to access <span>CRIMSy</span>.
+          </p>
+
+          <form id="loginForm" autocomplete="off">
+            <div class="form-group">
+              <label for="login">Username</label>
+              <input
+                type="text"
+                id="login"
+                name="login"
+                class="input"
+                placeholder="neo"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                class="input"
+                placeholder="••••••••"
+                required
+              />
+            </div>
+
+            <div class="form-footer">
+              <button type="submit" class="btn-primary">
+                <span>Login</span>
+              </button>
+            </div>
+
+            <p id="loginMessage" class="login-message"></p>
+          </form>
+      </main>
+
+      <footer class="app-footer">
+        <span>© 2025 CRIMSy</span>
+      </footer>
+    </div>
+
+    <script src="js/login.js"></script>
+  </body>
+</html>

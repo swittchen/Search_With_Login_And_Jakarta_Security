@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/search.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <header>
+      <h1>Hey and welcome by SEARCH in CRIMSy.</h1>
+    </header>
+
+    <main>
+      <div class="sUb">
+        <input type="text" id="sF1" class="sF" value="Benzo[a]pyren" />
+        <input type="button" value="start searching ..." class="btn1" />
+      </div>
+
+      <!-- Options and Container JSME -->
+      <div class="optAcont">
+        <!-- JSME CONTAINER -->
+        <div id="jsme_container" class="jsme"></div>
+
+        <!-- CHECKBOX OPTIONS -->
+        <div class="selectOptions">
+          <div class="gropCheckBoxAndLabel">
+            <input
+              type="checkbox"
+              name="materials"
+              id="mt"
+              class="checkbox"
+              value="MATERIALS"
+            />
+
+            <label for="materials">Materials</label>
+          </div>
+          <div class="gropCheckBoxAndLabel">
+            <input
+              type="checkbox"
+              name="items"
+              id="mt"
+              class="checkbox"
+              value="ITEMS"
+            />
+            <label for="materials">Items</label>
+          </div>
+          <div class="gropCheckBoxAndLabel">
+            <input
+              type="checkbox"
+              name="experiments"
+              id="mt"
+              class="checkbox"
+              value="EXPERIMENTS"
+            />
+            <label for="materials">Experiments</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="out1">
+        <h1></h1>
+      </div>
+    </main>
+
+    <footer></footer>
+
+    <!-- SCRIPTS -->
+    <!-- LOAD JSME MODULE -->
+    <script src="JSME_2024-04-29/jsme/jsme.nocache.js"></script>
+
+    <!-- INITIATE JSME MODULE -->
+    <script>
+      let jsmeApplet;
+
+      function jsmeOnLoad() {
+        // wird von JSME aufgerufen, wenn alles geladen ist
+        jsmeApplet = new JSApplet.JSME("jsme_container", "1200px", "400px", {});
+      }
+
+      async function getMolFile() {
+        return jsmeApplet.molFile();
+      }
+    </script>
+
+    <!-- SEARCH BUTTON SCRIPT -->
+    <script src="js/search.js"></script>
+  </body>
+</html>

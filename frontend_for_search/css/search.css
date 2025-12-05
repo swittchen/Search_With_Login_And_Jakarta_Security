@@ -1,0 +1,467 @@
+/* ===========================
+   CRIMSy SEARCH – Neon Matrix Style
+   =========================== */
+
+/* Gleiche Variablen wie beim Login */
+:root {
+    --bg-main: #050008;
+    --bg-card: rgba(8, 8, 16, 0.9);
+    --bg-card-border: rgba(120, 255, 190, 0.4);
+    --accent-green: #39ff14;
+    --accent-green-soft: rgba(57, 255, 20, 0.15);
+    --accent-violet: #7b2cff;
+    --accent-violet-soft: rgba(123, 44, 255, 0.25);
+    --text-main: #e5f9ff;
+    --text-muted: #7a8c99;
+    --error: #ff4b81;
+    --shadow-strong: 0 0 40px rgba(57, 255, 20, 0.3);
+    --radius-xl: 20px;
+    --transition-fast: 0.18s ease-out;
+    --transition-medium: 0.25s ease-out;
+  }
+  
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+  
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+  
+  body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      "Helvetica Neue", Arial, sans-serif;
+    background: radial-gradient(circle at top, #12001f 0, #020006 60%, #000 100%);
+    color: var(--text-main);
+  }
+  
+  /* ===========================
+     HEADER
+     =========================== */
+  
+  header {
+    padding: 16px 24px;
+    text-align: center;
+    border-bottom: 1px solid rgba(57, 255, 20, 0.25);
+    background: linear-gradient(
+      to right,
+      rgba(123, 44, 255, 0.18),
+      rgba(3, 3, 15, 0.9),
+      rgba(57, 255, 20, 0.2)
+    );
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9);
+  }
+  
+  header h1 {
+    margin: 0;
+    font-size: 1.3rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent-green);
+    text-shadow: 0 0 14px rgba(57, 255, 20, 0.6);
+  }
+  
+  /* ===========================
+     MAIN LAYOUT
+     =========================== */
+  
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 18px 28px;
+  }
+  
+  /* ===========================
+     SEARCH BAR
+     =========================== */
+  
+  .sUb {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 16px;
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--bg-card-border);
+    background: linear-gradient(
+        135deg,
+        rgba(57, 255, 20, 0.06),
+        rgba(123, 44, 255, 0.1)
+      ),
+      radial-gradient(circle at top left, rgba(123, 44, 255, 0.15), transparent),
+      radial-gradient(circle at bottom right, rgba(57, 255, 20, 0.18), transparent),
+      var(--bg-card);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.9), var(--shadow-strong);
+    margin-bottom: 18px;
+  }
+  
+  /* Textfeld (Search Field) */
+  .sF {
+    flex: 1;
+    padding: 10px 12px;
+    font-size: 0.95rem;
+    border-radius: 999px;
+    border: 1px solid rgba(130, 255, 195, 0.53);
+    background: radial-gradient(
+        circle at top,
+        rgba(11, 255, 167, 0.05),
+        transparent 60%
+      ),
+      rgba(2, 5, 10, 0.96);
+    color: var(--text-main);
+    outline: none;
+    transition: border-color var(--transition-fast),
+      box-shadow var(--transition-fast),
+      transform var(--transition-fast),
+      background var(--transition-fast);
+    font-family: "SFMono-Regular", ui-monospace, Menlo, Monaco, "Liberation Mono",
+      "Courier New", monospace;
+  }
+  
+  .sF::placeholder {
+    color: rgba(170, 214, 200, 0.6);
+  }
+  
+  .sF:focus {
+    border-color: var(--accent-green);
+    box-shadow: 0 0 0 1px rgba(57, 255, 20, 0.6),
+      0 0 18px rgba(57, 255, 20, 0.6);
+    transform: translateY(-1px);
+    background: rgba(3, 12, 8, 0.98);
+  }
+  
+  /* Button – im Stil deiner btn-primary */
+  .btn1 {
+    position: relative;
+    padding: 10px 22px;
+    border-radius: 999px;
+    border: 1px solid rgba(57, 255, 20, 0.85);
+    background: radial-gradient(
+        circle at 20% 0,
+        rgba(57, 255, 20, 0.28),
+        transparent 60%
+      ),
+      linear-gradient(135deg, #061708, #02140a 45%, #041c0f 100%);
+    color: #dfffe9;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    text-shadow: 0 0 8px rgba(57, 255, 20, 0.6);
+    cursor: pointer;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.85);
+    transition: transform var(--transition-medium),
+      box-shadow var(--transition-medium),
+      background var(--transition-medium),
+      border-color var(--transition-medium);
+    white-space: nowrap;
+  }
+  
+  .btn1::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(
+      circle at 10% 0,
+      rgba(255, 255, 255, 0.12),
+      transparent 45%
+    );
+    opacity: 0;
+    transition: opacity var(--transition-medium);
+  }
+  
+  .btn1:hover {
+    transform: translateY(-1px) scale(1.01);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.96),
+      0 0 26px rgba(57, 255, 20, 0.7);
+    border-color: #9bff7c;
+    background: radial-gradient(
+        circle at 30% 0,
+        rgba(57, 255, 20, 0.42),
+        transparent 60%
+      ),
+      linear-gradient(135deg, #071f0b, #031a0c 45%, #082712 100%);
+  }
+  
+  .btn1:hover::before {
+    opacity: 1;
+  }
+  
+  .btn1:active {
+    transform: translateY(1px) scale(0.99);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.9);
+  }
+  
+  /* ===========================
+     JSME + OPTIONS CONTAINER
+     =========================== */
+  
+  .optAcont {
+    display: flex;
+    gap: 18px;
+    margin-top: 12px;
+    align-items: stretch;
+    flex-wrap: wrap;
+  }
+  
+  /* JSME Container Card */
+  .jsme {
+    position: relative;
+    flex: 2;
+    min-width: 420px;
+    min-height: 320px;
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--bg-card-border);
+    background: linear-gradient(
+        135deg,
+        rgba(57, 255, 20, 0.04),
+        rgba(123, 44, 255, 0.12)
+      ),
+      radial-gradient(circle at top left, rgba(123, 44, 255, 0.14), transparent),
+      radial-gradient(circle at bottom right, rgba(57, 255, 20, 0.18), transparent),
+      var(--bg-card);
+    box-shadow: 0 22px 55px rgba(0, 0, 0, 0.9), var(--shadow-strong);
+    overflow: hidden;
+  }
+  
+  .jsme::before {
+    content: "Structure Editor";
+    position: absolute;
+    top: 10px;
+    left: 16px;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent-green);
+    text-shadow: 0 0 10px rgba(57, 255, 20, 0.7);
+    opacity: 0.85;
+    pointer-events: none;
+  }
+  
+  /* tatsächliches JSME-Canvas füllt die Karte aus */
+  #jsme_container {
+    width: 100%;
+    height: 100%;
+  }
+  
+  /* ===========================
+     CHECKBOX OPTIONS
+     =========================== */
+  
+  .selectOptions {
+    flex: 1;
+    min-width: 240px;
+    max-width: 320px;
+    border-radius: var(--radius-xl);
+    border: 1px solid rgba(123, 44, 255, 0.55);
+    background: linear-gradient(
+        145deg,
+        rgba(123, 44, 255, 0.16),
+        rgba(57, 255, 20, 0.04)
+      ),
+      var(--bg-card);
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.94);
+    padding: 14px 16px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .selectOptions::before {
+    content: "Search Scope";
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent-violet);
+    margin-bottom: 4px;
+  }
+  
+  /* eine Gruppe: Checkbox + Label */
+  .gropCheckBoxAndLabel {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 8px;
+    border-radius: 999px;
+    background: radial-gradient(
+        circle at 0 50%,
+        rgba(123, 44, 255, 0.28),
+        transparent 60%
+      ),
+      rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(123, 44, 255, 0.6);
+    transition: background var(--transition-fast),
+      border-color var(--transition-fast),
+      transform var(--transition-fast),
+      box-shadow var(--transition-fast);
+  }
+  
+  .gropCheckBoxAndLabel:hover {
+    transform: translateY(-1px);
+    border-color: var(--accent-green);
+    box-shadow: 0 0 18px rgba(123, 44, 255, 0.7);
+  }
+  
+  /* Custom Checkbox */
+  .checkbox {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 6px;
+    border: 1px solid rgba(170, 214, 255, 0.7);
+    background: rgba(3, 5, 10, 0.95);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.8);
+    cursor: pointer;
+    position: relative;
+    transition: border-color var(--transition-fast),
+      box-shadow var(--transition-fast),
+      background var(--transition-fast),
+      transform var(--transition-fast);
+  }
+  
+  .checkbox:checked {
+    background: radial-gradient(
+        circle at 30% 0,
+        rgba(255, 255, 255, 0.18),
+        transparent 55%
+      ),
+      var(--accent-green);
+    border-color: #d2ffe0;
+    box-shadow: 0 0 14px rgba(57, 255, 20, 0.8);
+    transform: translateY(-0.5px) scale(1.02);
+  }
+  
+  .checkbox:checked::after {
+    content: "";
+    position: absolute;
+    inset: 3px;
+    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.75);
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.8);
+  }
+  
+  /* Label für die Checkboxen */
+  .gropCheckBoxAndLabel label {
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-main);
+    cursor: pointer;
+  }
+  
+  /* ===========================
+     OUTPUT-BEREICH
+     =========================== */
+  
+  .out1 {
+    margin-top: 22px;
+    border-radius: var(--radius-xl);
+    border: 1px solid rgba(57, 255, 20, 0.4);
+    background: linear-gradient(
+        135deg,
+        rgba(57, 255, 20, 0.04),
+        rgba(123, 44, 255, 0.14)
+      ),
+      rgba(3, 5, 10, 0.96);
+    min-height: 80px;
+    padding: 14px 16px 10px;
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.9);
+  }
+  
+  .out1 h1 {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--accent-green);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  
+  /* Wenn du später Result-Items einfügst, kannst du z.B. .result-item stylen */
+  .result-item {
+    margin-top: 8px;
+    padding: 8px 10px;
+    border-radius: 10px;
+    background: rgba(2, 8, 4, 0.9);
+    border: 1px solid rgba(57, 255, 20, 0.35);
+    font-size: 0.85rem;
+  }
+
+  .json-like {
+  font-family: "SFMono-Regular", ui-monospace, Menlo, Monaco, Consolas,
+    "Liberation Mono", monospace;
+  font-size: 0.8rem;
+  white-space: pre-wrap;
+  line-height: 1.5;
+  color: var(--accent-green);
+  background: rgba(0, 0, 0, 0.85);
+  border: 1px solid rgba(57, 255, 20, 0.45);
+  border-radius: 14px;
+  padding: 12px 14px;
+  box-shadow: 0 0 22px rgba(57, 255, 20, 0.35);
+}
+
+.json-like.error {
+  color: var(--error);
+  border-color: rgba(255, 75, 129, 0.6);
+  box-shadow: 0 0 22px rgba(255, 75, 129, 0.4);
+}
+
+  
+  /* ===========================
+     FOOTER
+     =========================== */
+  
+  /* footer {
+    margin-top: 18px;
+    padding: 10px 16px 14px;
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    background: linear-gradient(
+      to right,
+      rgba(57, 255, 20, 0.05),
+      rgba(0, 0, 0, 0.9),
+      rgba(123, 44, 255, 0.07)
+    );
+    border-top: 1px solid rgba(57, 255, 20, 0.2);
+  } */
+  
+  /* ===========================
+     RESPONSIVE
+     =========================== */
+  
+  @media (max-width: 900px) {
+    .optAcont {
+      flex-direction: column;
+    }
+  
+    .jsme {
+      min-width: 100%;
+    }
+  
+    .selectOptions {
+      max-width: 100%;
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .sUb {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  
+    .btn1 {
+      width: 100%;
+      text-align: center;
+    }
+  
+    header h1 {
+      font-size: 1rem;
+    }
+  }
+  

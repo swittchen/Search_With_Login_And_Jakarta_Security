@@ -1,0 +1,4 @@
+#!/bin/bash
+cd ~/Downloads/REST_API_CRIMSy_SEARCH
+mvn clean -DskipTests package
+docker cp target/backend.war SEARCH:/usr/local/tomee/webapps/backend.war

@@ -1,0 +1,135 @@
+openapi: 3.1.0
+
+info:
+  title: Rest Endpoint for Search in CRIMSy
+  summary: Description of the API Endpoint "SEARCH".
+  description: >
+    REST endpoint for search functionality in CRIMSy.
+    Supports simple text search and advanced search including chemical
+    structure queries via a molfile.
+  version: v2
+
+servers:
+  - url: "https://biocloud.ipb-halle.de"
+    description: Production CRIMSy instance
+  - url: "http://localhost:8888/backend/api"
+    description: Local TomEE (dev)
+
+paths:
+  /hey:
+    get:
+      summary: Health check for SEARCH API
+      description: Simple endpoint to verify that the SEARCH service is reachable.
+      responses:
+        "200":
+          description: Service is alive.
+          content:
+            text/plain:
+              schema:
+                type: string
+              example: "SEARCH API is alive"
+  /search:
+    post:
+      tags:
+        - CRIMSy Search
+      operationId: search
+      summary: Search for entities in CRIMSy
+      description: >
+        Search for entities and documents in CRIMSy using text and/or
+        chemical structure (molfile).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SearchRequest"
+            example:
+              searchTarget: "MATERIALS ITEMS EXPERIMENTS"
+              searchValues: "Biomaterial"
+              textQuery: "Benzo[a]pyren"
+              molFile: |
+                JME 2024-04-29 Fri Nov 21 14:45:04 GMT+100 2025
+
+                  0  0  0  0  0  0  0  0  0  0999 V2000
+                M  END
+      responses:
+        "200":
+          description: Success.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SearchResultItem"
+              examples:
+                singleResult:
+                  summary: Single search result example
+                  value:
+                    - name: "benzol"
+                      location: "R301"
+                      type: "Location"
+                      relevance: "high"
+        "201":
+          description: Created.
+        "401":
+          description: Not authorized.
+        "404":
+          description: Not found.
+
+components:
+  securitySchemes:
+    bearerAuth:
+      description: Bearer token
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    SearchRequest:
+      type: object
+      properties:
+        searchTarget:
+          type: string
+          description: >
+            Search target (e.g. MATERIALS, ITEMS, EXPERIMENTS —
+            может быть комбинация через пробел).
+          example: "MATERIALS ITEMS EXPERIMENTS"
+        searchValues:
+          type: string
+          description: Optional search category or type.
+          example: "Biomaterial"
+        textQuery:
+          type: string
+          description: Text query from the search field.
+          example: "Benzo[a]pyren"
+        molFile:
+          type: string
+          description: >
+            Molfile content for structure search (optional).
+          nullable: true
+      required:
+        - searchTarget
+        - textQuery
+
+    SearchResultItem:
+      type: object
+      properties:
+        name:
+          type: string
+          example: "benzol"
+        location:
+          type: string
+          example: "R301"
+        type:
+          type: string
+          example: "Location"
+        relevance:
+          type: string
+          example: "high"
+      required:
+        - name
+        - location
+        - type
+
+security:
+  - bearerAuth: []
