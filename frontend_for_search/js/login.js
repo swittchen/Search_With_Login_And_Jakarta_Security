@@ -64,7 +64,7 @@
         }
       );
       if (response2.status === 200) {
-        window.location.href = "../search.html";
+        window.location.href = "./search.html";
       }
       if (response2.status === 401 || response2.status === 403) {
         // Nicht eingeloggt oder nicht genug Rechte

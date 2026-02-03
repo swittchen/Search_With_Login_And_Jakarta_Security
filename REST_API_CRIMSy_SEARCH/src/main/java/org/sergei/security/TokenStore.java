@@ -1,9 +1,6 @@
 package org.sergei.security;
 
 import jakarta.annotation.PostConstruct;
-import jakarta.ejb.Lock;
-import jakarta.ejb.LockType;
-import jakarta.ejb.Singleton;
 import jakarta.enterprise.context.ApplicationScoped;
 import org.sergei.security.support_classes.AuthToken;
 import org.sergei.security.support_classes.Role;
